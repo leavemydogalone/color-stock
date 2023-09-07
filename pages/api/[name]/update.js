@@ -11,7 +11,7 @@ export default async (req, res) => {
       .collection("colors")
       .findOneAndUpdate(
         { name: `${name}` },
-        { $inc: { count: parseInt(req.body.number) } },
+        { $inc: { count: parseInt(req.body.count) } },
         { returnDocument: "after" }
       );
     const count = color.value.count;
