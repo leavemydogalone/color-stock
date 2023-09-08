@@ -23,7 +23,8 @@ export default function ChartContainer() {
             label: "Current Market Count",
             data: colors.map((color) => color.count),
             backgroundColor: colors.map((color) => color.name),
-            borderColor: "black",
+
+            fill: false,
           },
         ],
       });
