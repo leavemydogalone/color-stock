@@ -1,7 +1,34 @@
-import React, { createContext } from "react";
+import React, { createContext, useEffect, useReducer, useState } from "react";
 
-const ColorsContext = createContext(null);
+export const ColorsContext = createContext({
+  colors: [],
+  setColors: () => {},
+});
 
 export default function ColorsProvider({ children }) {
-  return <ColorsContext.Provider>{children}</ColorsContext.Provider>;
+  const [colors, setColors] = useState([]);
+  const value = { colors, setColors };
+
+  const fetchColors = async () => {
+    const response = await fetch("/api/colors", {
+      method: "GET",
+    });
+    const data = await response.json();
+    setColors(data);
+  };
+
+  const updateColors = async () => {
+    const response = await fetch("/api/colors/update/red", {
+      method: "POST",
+      body: JSON.stringify(newTodo),
+    });
+  };
+
+  useEffect(() => {
+    fetchColors();
+  }, []);
+
+  return (
+    <ColorsContext.Provider value={value}>{children}</ColorsContext.Provider>
+  );
 }
