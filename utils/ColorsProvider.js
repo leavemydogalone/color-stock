@@ -17,11 +17,13 @@ export default function ColorsProvider({ children }) {
     setColors(data);
   };
 
-  const updateColors = async () => {
-    const response = await fetch("/api/colors/update/red", {
+  const updateColors = async (colorStr, adjustment) => {
+    const response = await fetch(`/api/${colorStr}/update/`, {
       method: "POST",
-      body: JSON.stringify(newTodo),
+      body: JSON.stringify({ count: adjustment }),
     });
+    const newColors = await response.json();
+    setColors(newColors);
   };
 
   const value = { colors, setColors, updateColors };
