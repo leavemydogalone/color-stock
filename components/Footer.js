@@ -5,29 +5,33 @@ import styles from "./Footer.module.css";
 
 export default function Footer() {
   const userColorsContextProvider = useContext(UserColorsContext);
-  // console.log(userColorsContextProvider.userColors[0][name]);
 
   const { userColors } = userColorsContextProvider;
 
-  useEffect(() => {
-    console.log(userColors);
-  }, [userColors]);
-
   return (
     <footer>
-      {userColors
-        ? userColors.map((color) => (
-            <div
-              className={clsx({
-                [color.name]: true,
-                [styles.ticker]: true,
-              })}
-            >
-              {color.name}
-              {color.count}{" "}
-            </div>
-          ))
-        : "Loading"}
+      <section className={styles.container}>
+        <h3 className={styles.title}>Your Color Count</h3>
+        <div className={styles.colorsContainer}>
+          {userColors
+            ? userColors.map((color, index) => (
+                <>
+                  <div
+                    key={`userColor.${color.name}`}
+                    className={clsx({
+                      [color.name]: true,
+                      [styles.color]: true,
+                    })}
+                  >
+                    <h4 className={styles.name}>{color.name}</h4>
+                    <figure className={styles.count}>{color.count}</figure>
+                  </div>
+                  {index < 4 && <hr className={styles.hr} />}
+                </>
+              ))
+            : "Loading"}
+        </div>
+      </section>
     </footer>
   );
 }

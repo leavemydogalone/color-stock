@@ -7,6 +7,10 @@
   display: grid;
   grid-template-rows: auto 1fr auto;
   min-height: 100vh;
+  --color-primary: #6666e0;
+  --color-black: #3d3d3d;
+  --color-neutral: #6666e0;
+  --color-hr: #fff;
 }
 header,
 footer {

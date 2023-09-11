@@ -15,9 +15,12 @@ export default function ChartContainer() {
   const { colors } = colorsContextProvider;
 
   useEffect(() => {
+    const updatedColorNames = colors.map(
+      (color) => color.name.charAt(0).toUpperCase() + color.name.slice(1)
+    );
     if (colors.length > 1) {
       setData({
-        labels: colors.map((color) => color.name),
+        labels: updatedColorNames,
         datasets: [
           {
             label: "Current Market Count",

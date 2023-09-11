@@ -5,7 +5,6 @@ import styles from "./Header.module.css";
 
 export default function Header() {
   const colorsContextProvider = useContext(ColorsContext);
-  console.log(colorsContextProvider.colors);
 
   const { colors } = colorsContextProvider;
 
