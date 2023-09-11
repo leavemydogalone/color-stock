@@ -3,11 +3,11 @@ import React, { createContext, useEffect, useState } from "react";
 export const ColorsContext = createContext({
   colors: [],
   setColors: () => {},
+  updateColors: () => {},
 });
 
 export default function ColorsProvider({ children }) {
   const [colors, setColors] = useState([]);
-  const value = { colors, setColors };
 
   const fetchColors = async () => {
     const response = await fetch("/api/colors", {
@@ -23,6 +23,8 @@ export default function ColorsProvider({ children }) {
       body: JSON.stringify(newTodo),
     });
   };
+
+  const value = { colors, setColors, updateColors };
 
   useEffect(() => {
     fetchColors();

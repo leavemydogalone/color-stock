@@ -12,3 +12,15 @@ header,
 footer {
   min-height: 100px;
 }
+.red {
+  color: red;
+}
+.blue {
+  color: blue;
+}
+.green {
+  color: green;
+}
+.purple {
+  color: purple;
+}
