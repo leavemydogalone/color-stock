@@ -20,12 +20,9 @@ export default function FooterColor({ color, index }) {
         [color.name]: true,
         [styles.color]: true,
       })}
-      style={{
-        borderColor: `var(--color-${color.name})`,
-      }}
     >
       <div className={styles.lefty}>
-        <h4 className={styles.name}>{color.name}</h4>
+        {/* <h4 className={styles.name}>{color.name}</h4> */}
         <figure
           className={styles.count}
           style={{
