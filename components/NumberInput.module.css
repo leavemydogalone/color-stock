@@ -1,0 +1,26 @@
+.container {
+  color: var(--color-dark);
+}
+.container h5 {
+  text-transform: uppercase;
+  text-align: center;
+}
+.roundedRow {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  width: 75px;
+  text-align: center;
+  border: 1px solid var(--color-primary);
+  border-radius: 5px;
+  overflow: hidden;
+  margin: 0 auto;
+  background-color: white;
+  margin: 5px 0 8px;
+  /* box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.07); */
+}
+.container button {
+  border: unset;
+  background-color: var(--color-primary);
+  color: white;
+  font-size: 16px;
+}

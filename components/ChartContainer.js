@@ -32,7 +32,6 @@ export default function ChartContainer() {
         ],
       });
     }
-    console.log(chartData);
   }, [colors]);
 
   return (

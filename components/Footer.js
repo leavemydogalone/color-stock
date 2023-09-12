@@ -4,6 +4,7 @@ import { ColorsContext } from "../utils/ColorsProvider";
 
 import clsx from "clsx";
 import styles from "./Footer.module.css";
+import FooterColor from "./FooterColor";
 
 export default function Footer() {
   const userColorsContextProvider = useContext(UserColorsContext);
@@ -12,6 +13,12 @@ export default function Footer() {
   const { userColors } = userColorsContextProvider;
   const { updateColors } = colorsContextProvider;
 
+  function handleClick() {
+    try {
+      //try the update colors
+      // and then the update userColors
+    } catch (error) {}
+  }
   return (
     <footer>
       <section className={styles.container}>
@@ -20,20 +27,7 @@ export default function Footer() {
           {userColors
             ? userColors.map((color, index) => (
                 <>
-                  <div
-                    key={`userColor.${color.name}`}
-                    className={clsx({
-                      [color.name]: true,
-                      [styles.color]: true,
-                    })}
-                  >
-                    <h4 className={styles.name}>{color.name}</h4>
-                    <figure className={styles.count}>{color.count}</figure>
-                    <button onClick={() => updateColors(color.name, -16)}>
-                      Update
-                    </button>
-                  </div>
-                  {index < 4 && <hr className={styles.hr} />}
+                  <FooterColor color={color} index={index} />
                 </>
               ))
             : "Loading"}
