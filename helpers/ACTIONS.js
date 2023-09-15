@@ -3,6 +3,7 @@ const ACTIONS = {
   BUY: "buy",
   INCREMENT: "add",
   DECREMENT: "substract",
+  NONE: "none",
 };
 
 export default ACTIONS;

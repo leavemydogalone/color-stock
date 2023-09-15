@@ -1,18 +1,34 @@
-import React, { useReducer, useState } from "react";
+import React, { useReducer, useContext } from "react";
 import styles from "./FooterColor.module.css";
 import clsx from "clsx";
 import NumberInput from "./NumberInput";
 import ACTIONS from "../helpers/ACTIONS";
 import { reducer } from "../helpers/buySellReducer";
+import { ColorsContext } from "utils/ColorsProvider";
+import { UserColorsContext } from "utils/UserColorsProvider";
 
 export default function FooterColor({ color, index }) {
-  const [state, dispatch] = useReducer(reducer, {
-    sellNumber: 0,
-    buyNumber: 0,
-    count: color.count,
-  });
+  let initCount = color.count;
+  const initState = () => {
+    return { sellNumber: 0, buyNumber: 0, count: initCount };
+  };
 
-  function handleConfirm() {}
+  ///I think the error is coming from a bad set state of the color count in here somewhere
+  const [state, dispatch] = useReducer(reducer, initState());
+
+  const colorsContextProvider = useContext(ColorsContext);
+  const userColorsContextProvider = useContext(UserColorsContext);
+
+  const { updateColors } = colorsContextProvider;
+  const { updateUserColors } = userColorsContextProvider;
+
+  const confirmButtonAction =
+    state.buyNumber > 0
+      ? ACTIONS.BUY
+      : state.sellNumber > 0
+      ? ACTIONS.SELL
+      : ACTIONS.NONE;
+
   return (
     <article
       key={`userColor.${color.name}`}
@@ -32,7 +48,7 @@ export default function FooterColor({ color, index }) {
           {color.count}
         </figure>
       </div>
-      {/* <button onClick={() => updateColors(color.name, -16)}>Update</button> */}
+
       <div className={styles.righty}>
         <NumberInput
           number={state.buyNumber}
@@ -50,7 +66,16 @@ export default function FooterColor({ color, index }) {
 
         <button
           className={styles.confirm}
-          onClick={handleConfirm}
+          onClick={() =>
+            dispatch({
+              type: confirmButtonAction,
+              payload: {
+                colorName: color.name,
+                updateColors: updateColors,
+                updateUserColors: updateUserColors,
+              },
+            })
+          }
           style={{
             backgroundColor: `var(--color-${color.name})`,
             color: "white",

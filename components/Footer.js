@@ -13,12 +13,6 @@ export default function Footer() {
   const { userColors } = userColorsContextProvider;
   const { updateColors } = colorsContextProvider;
 
-  function handleClick() {
-    try {
-      //try the update colors
-      // and then the update userColors
-    } catch (error) {}
-  }
   return (
     <footer>
       <section className={styles.container}>
