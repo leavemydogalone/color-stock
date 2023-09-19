@@ -5,7 +5,7 @@ export function reducer(state, action) {
   switch (type) {
     case ACTIONS.INCREMENT:
       if (payload.buyOrSell === "sell") {
-        if (state.sellNumber >= state.count) {
+        if (state.sellNumber >= payload.count) {
           return { ...state };
         } else {
           return {
@@ -16,7 +16,7 @@ export function reducer(state, action) {
         }
       } else if (payload.buyOrSell === "buy") {
         if (
-          payload.marketColorCount - (state.buyNumber + state.count) <=
+          payload.marketColorCount - (state.buyNumber + payload.count) <=
           -100
         ) {
           return { ...state };

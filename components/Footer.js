@@ -17,13 +17,11 @@ export default function Footer() {
         <div className={styles.colorsContainer}>
           {userColors
             ? userColors.map((color, index) => (
-                <>
-                  <FooterColor
-                    color={color}
-                    key={`footerColor${color}`}
-                    index={index}
-                  />
-                </>
+                <FooterColor
+                  color={color}
+                  key={`footerColor${color.name}`}
+                  index={index}
+                />
               ))
             : "Loading"}
         </div>

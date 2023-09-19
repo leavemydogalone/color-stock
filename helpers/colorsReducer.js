@@ -30,6 +30,30 @@ export default function colorsReducer(state, action) {
         userColors: fetchUserColors(),
       };
       break;
+    case COLOR_CONTEXT_ACTIONS.HANDLE_SELL:
+      const updateMarketColors = async () => {
+        try {
+          const response = await fetch(`/api/${payload.colorName}/update/`, {
+            method: "POST",
+            body: JSON.stringify({ count: payload.buySellAmount }),
+          });
+          const updatedMarketColors = await response.json();
+          return updatedMarketColors;
+        } catch (err) {
+          console.log(err);
+          return err;
+        }
+      };
+
+      return {
+        // marketColors: [...updateMarketColors()],
+        userColors: state.userColors.map((color, i) =>
+          color.name === payload.colorName
+            ? { ...color, count: color.count - payload.buySellAmount }
+            : color
+        ),
+      };
+
     case ACTIONS.BUY:
       payload.updateColors(payload.colorName, -state.buyNumber);
       payload.updateUserColors(payload.colorName, state.buyNumber);

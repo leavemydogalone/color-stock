@@ -4,11 +4,13 @@ import ACTIONS from "../helpers/ACTIONS.js";
 
 import { ColorsContext } from "/utils/ColorsProvider";
 
-export default function NumberInput({ type, number, dispatch, name }) {
+export default function NumberInput({ type, number, dispatch, color }) {
   const colorsContextProvider = useContext(ColorsContext);
 
   const { colorsState } = colorsContextProvider;
   const { marketColors } = colorsState;
+
+  const { name, count } = color;
 
   const thisColor = marketColors.find((color) => color.name === name);
 
@@ -28,7 +30,7 @@ export default function NumberInput({ type, number, dispatch, name }) {
           onClick={() =>
             dispatch({
               type: ACTIONS.DECREMENT,
-              payload: { buyOrSell: type },
+              payload: { buyOrSell: type, count: count },
             })
           }
         >
@@ -43,7 +45,11 @@ export default function NumberInput({ type, number, dispatch, name }) {
           onClick={() =>
             dispatch({
               type: ACTIONS.INCREMENT,
-              payload: { buyOrSell: type, marketColorCount: thisColor.count },
+              payload: {
+                buyOrSell: type,
+                marketColorCount: thisColor.count,
+                count: count,
+              },
             })
           }
         >

@@ -3,23 +3,47 @@ import styles from "./FooterColor.module.css";
 import clsx from "clsx";
 import NumberInput from "./NumberInput";
 import ACTIONS from "../helpers/ACTIONS";
+import COLOR_CONTEXT_ACTIONS from "../helpers/COLOR_CONTEXT_ACTIONS";
 import { reducer } from "../helpers/incrementDecrementReducer";
+import { ColorsContext } from "../utils/ColorsProvider";
 
 export default function FooterColor({ color, index }) {
-  let initCount = color.count;
-  const initState = () => {
-    return { sellNumber: 0, buyNumber: 0, count: initCount };
-  };
+  const colorsContextProvider = useContext(ColorsContext);
 
+  const { colorsReducerDispatch } = colorsContextProvider;
+
+  const initState = () => {
+    return { sellNumber: 0, buyNumber: 0 };
+  };
   ///I think the error is coming from a bad set state of the color count in here somewhere
   const [state, dispatch] = useReducer(reducer, initState());
 
-  const confirmButtonAction =
+  const confirmButtonAction = COLOR_CONTEXT_ACTIONS.HANDLE_SELL;
+  // state.buyNumber > 0
+  //   ? ACTIONS.BUY
+  //   : state.sellNumber > 0
+  //   ? ACTIONS.SELL
+  //   : ACTIONS.NONE;
+
+  function handleSubmit() {
     state.buyNumber > 0
-      ? ACTIONS.BUY
+      ? colorsReducerDispatch({
+          type: COLOR_CONTEXT_ACTIONS.HANDLE_SELL,
+          payload: {
+            colorName: color.name,
+            buySellAmount: state.buyNumber,
+          },
+        })
       : state.sellNumber > 0
-      ? ACTIONS.SELL
+      ? colorsReducerDispatch({
+          type: COLOR_CONTEXT_ACTIONS.HANDLE_SELL,
+          payload: {
+            colorName: color.name,
+            buySellAmount: state.sellNumber,
+          },
+        })
       : ACTIONS.NONE;
+  }
 
   return (
     <article
@@ -46,7 +70,7 @@ export default function FooterColor({ color, index }) {
           number={state.buyNumber}
           type={ACTIONS.BUY}
           dispatch={dispatch}
-          name={color.name}
+          color={color}
           key={`colorInputOne ${color.name} `}
         />
 
@@ -54,22 +78,13 @@ export default function FooterColor({ color, index }) {
           number={state.sellNumber}
           type={ACTIONS.SELL}
           dispatch={dispatch}
-          name={color.name}
+          color={color}
           key={`colorInputTwo ${color.name} `}
         />
 
         <button
           className={styles.confirm}
-          // onClick={() =>
-          //   dispatch({
-          //     type: confirmButtonAction,
-          //     payload: {
-          //       colorName: color.name,
-          //       updateColors: updateColors,
-          //       updateUserColors: updateUserColors,
-          //     },
-          //   })
-          // }
+          onClick={() => handleSubmit()}
           style={{
             backgroundColor: `var(--color-${color.name})`,
             color: "white",
