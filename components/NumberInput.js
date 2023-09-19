@@ -1,16 +1,16 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import styles from "./NumberInput.module.css";
 import ACTIONS from "../helpers/ACTIONS.js";
-// import { UserColorsContext } from "/utils/UserColorsProvider";
+
 import { ColorsContext } from "/utils/ColorsProvider";
 
 export default function NumberInput({ type, number, dispatch, name }) {
-  //   const userColorsContextProvider = useContext(UserColorsContext);
   const colorsContextProvider = useContext(ColorsContext);
 
-  const { colors } = colorsContextProvider;
+  const { colorsState } = colorsContextProvider;
+  const { marketColors } = colorsState;
 
-  const thisColor = colors.find((color) => color.name === name);
+  const thisColor = marketColors.find((color) => color.name === name);
 
   return (
     <div className={styles.container}>

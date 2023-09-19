@@ -12,27 +12,28 @@ export default function ChartContainer() {
   const [chartData, setData] = useState(null);
   const colorsContextProvider = useContext(ColorsContext);
 
-  const { colors } = colorsContextProvider;
+  const { colorsState } = colorsContextProvider;
+  const { marketColors } = colorsState;
 
   useEffect(() => {
-    const updatedColorNames = colors.map(
+    const updatedColorNames = marketColors.map(
       (color) => color.name.charAt(0).toUpperCase() + color.name.slice(1)
     );
-    if (colors.length > 1) {
+    if (marketColors.length > 1) {
       setData({
         labels: updatedColorNames,
         datasets: [
           {
             label: "Current Market Count",
-            data: colors.map((color) => color.count),
-            backgroundColor: colors.map((color) => color.name),
+            data: marketColors.map((color) => color.count),
+            backgroundColor: marketColors.map((color) => color.name),
 
             fill: false,
           },
         ],
       });
     }
-  }, [colors]);
+  }, [marketColors]);
 
   return (
     <div className={styles.chartContainer}>

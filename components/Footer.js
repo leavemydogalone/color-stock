@@ -1,17 +1,14 @@
 import React, { useContext } from "react";
-import { UserColorsContext } from "../utils/UserColorsProvider";
 import { ColorsContext } from "../utils/ColorsProvider";
 
-import clsx from "clsx";
 import styles from "./Footer.module.css";
 import FooterColor from "./FooterColor";
 
 export default function Footer() {
-  const userColorsContextProvider = useContext(UserColorsContext);
   const colorsContextProvider = useContext(ColorsContext);
 
-  const { userColors } = userColorsContextProvider;
-  const { updateColors } = colorsContextProvider;
+  const { colorsState } = colorsContextProvider;
+  const { userColors } = colorsState;
 
   return (
     <footer>
@@ -21,7 +18,11 @@ export default function Footer() {
           {userColors
             ? userColors.map((color, index) => (
                 <>
-                  <FooterColor color={color} index={index} />
+                  <FooterColor
+                    color={color}
+                    key={`footerColor${color}`}
+                    index={index}
+                  />
                 </>
               ))
             : "Loading"}

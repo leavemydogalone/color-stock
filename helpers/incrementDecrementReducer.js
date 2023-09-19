@@ -41,20 +41,10 @@ export function reducer(state, action) {
       }
       break;
 
-    //I should just move the two contexts together and then move these functions to the reducer for it
-    case ACTIONS.SELL:
-      payload.updateColors(payload.colorName, state.sellNumber);
-      payload.updateUserColors(payload.colorName, -Math.abs(state.sellNumber));
-      return { ...state, sellNumber: 0 };
-      break;
-    case ACTIONS.BUY:
-      payload.updateColors(payload.colorName, -state.buyNumber);
-      payload.updateUserColors(payload.colorName, state.buyNumber);
-      return { ...state, buyNumber: 0 };
-      break;
     case ACTIONS.NONE:
       return { ...state };
     default:
+      return { ...state };
       break;
   }
 }

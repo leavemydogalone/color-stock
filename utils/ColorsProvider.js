@@ -1,40 +1,59 @@
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useEffect, useReducer, useState } from "react";
+import COLOR_CONTEXT_ACTIONS from "../helpers/COLOR_CONTEXT_ACTIONS";
+import colorsReducer from "../helpers/colorsReducer";
 
 export const ColorsContext = createContext({
-  colors: [],
-  setColors: () => {},
-  updateColors: () => {},
+  marketColors: [],
+  setMarketColors: () => {},
+  updateMarketColors: () => {},
+  colorsState: {},
 });
 
 export default function ColorsProvider({ children }) {
-  const [colors, setColors] = useState([]);
+  const [marketColors, setMarketColors] = useState([]);
 
-  const fetchColors = async () => {
+  const [colorsState, dispatch] = useReducer(colorsReducer, {
+    marketColors: [],
+    userColors: [],
+  });
+
+  const fetchMarketColors = async () => {
     const response = await fetch("/api/colors", {
       method: "GET",
     });
     const data = await response.json();
-    setColors(data);
+    setMarketColors(data);
+    return data;
   };
 
-  const updateColors = async (colorStr, adjustment) => {
-    try {
-      const response = await fetch(`/api/${colorStr}/update/`, {
-        method: "POST",
-        body: JSON.stringify({ count: adjustment }),
-      });
-      const newColors = await response.json();
-      setColors(newColors);
-    } catch (err) {
-      console.log(err);
-      return err;
-    }
+  // const updateMarketColors = async (colorStr, adjustment) => {
+  //   try {
+  //     const response = await fetch(`/api/${colorStr}/update/`, {
+  //       method: "POST",
+  //       body: JSON.stringify({ count: adjustment }),
+  //     });
+  //     const newColors = await response.json();
+  //     setMarketColors(newColors);
+  //   } catch (err) {
+  //     console.log(err);
+  //     return err;
+  //   }
+  // };
+
+  const value = {
+    colorsState,
   };
 
-  const value = { colors, setColors, updateColors };
+  console.log(colorsState);
 
   useEffect(() => {
-    fetchColors();
+    fetchMarketColors().then((data) => {
+      dispatch({
+        type: COLOR_CONTEXT_ACTIONS.FETCH_MARKET_COLORS,
+        payload: { updatedMarketcolors: data },
+      });
+    });
+    dispatch({ type: COLOR_CONTEXT_ACTIONS.FETCH_USER_COLORS });
   }, []);
 
   return (

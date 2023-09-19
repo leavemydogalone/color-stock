@@ -1,7 +1,6 @@
 import "globals.css";
 import { Poppins } from "next/font/google";
 import ColorsProvider from "../utils/ColorsProvider";
-import UserColorsProvider from "../utils/UserColorsProvider";
 
 const poppins = Poppins({
   weight: ["400", "500", "600", "700"],
@@ -17,9 +16,7 @@ export default function MyApp({ Component, pageProps }) {
         }
       `}</style>
       <ColorsProvider>
-        <UserColorsProvider>
-          <Component {...pageProps} />
-        </UserColorsProvider>
+        <Component {...pageProps} />
       </ColorsProvider>
     </>
   );

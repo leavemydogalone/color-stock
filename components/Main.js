@@ -6,10 +6,12 @@ import { ColorsContext } from "../utils/ColorsProvider";
 export default function Main() {
   const colorsContextProvider = useContext(ColorsContext);
 
-  const { colors } = colorsContextProvider;
+  const { colorsState } = colorsContextProvider;
+  const { marketColors } = colorsState;
+
   return (
     <main className={styles.main}>
-      {colors ? <ChartContainer /> : "Loading"}
+      {marketColors ? <ChartContainer /> : "Loading"}
     </main>
   );
 }
