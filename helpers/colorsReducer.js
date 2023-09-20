@@ -10,23 +10,6 @@ export default function colorsReducer(state, action) {
       };
       break;
     case COLOR_CONTEXT_ACTIONS.FETCH_USER_COLORS:
-      console.log(payload);
-      // const fetchUserColors = () => {
-      //   if (!localStorage.getItem("userColors")) {
-      //     localStorage.setItem(
-      //       "userColors",
-      //       JSON.stringify([
-      //         { name: "red", count: 5 },
-      //         { name: "blue", count: 5 },
-      //         { name: "black", count: 5 },
-      //         { name: "green", count: 5 },
-      //         { name: "purple", count: 5 },
-      //       ])
-      //     );
-      //   }
-      //   return JSON.parse(localStorage.getItem("userColors"));
-      // };
-
       return {
         ...state,
         userColors: payload.userColors,

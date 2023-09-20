@@ -7,7 +7,7 @@ import { ColorsContext } from "/utils/ColorsProvider";
 export default function NumberInput({ type, number, dispatch, color }) {
   const colorsContextProvider = useContext(ColorsContext);
 
-  const { colorsState } = colorsContextProvider;
+  const { colorsState, handleSell } = colorsContextProvider;
   const { marketColors } = colorsState;
 
   const { name, count } = color;

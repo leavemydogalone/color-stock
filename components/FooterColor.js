@@ -10,7 +10,7 @@ import { ColorsContext } from "../utils/ColorsProvider";
 export default function FooterColor({ color, index }) {
   const colorsContextProvider = useContext(ColorsContext);
 
-  const { colorsReducerDispatch } = colorsContextProvider;
+  const { handleSell } = colorsContextProvider;
 
   const initState = () => {
     return { sellNumber: 0, buyNumber: 0 };
@@ -18,13 +18,11 @@ export default function FooterColor({ color, index }) {
   ///I think the error is coming from a bad set state of the color count in here somewhere
   const [state, dispatch] = useReducer(reducer, initState());
 
-  const confirmButtonAction = COLOR_CONTEXT_ACTIONS.HANDLE_SELL;
-  // state.buyNumber > 0
-  //   ? ACTIONS.BUY
-  //   : state.sellNumber > 0
-  //   ? ACTIONS.SELL
-  //   : ACTIONS.NONE;
-
+  function sell() {
+    handleSell(color.name, state.sellNumber);
+    dispatch({ type: ACTIONS.ZERO });
+  }
+  function buy() {}
   function handleSubmit() {
     state.buyNumber > 0
       ? colorsReducerDispatch({
@@ -35,13 +33,7 @@ export default function FooterColor({ color, index }) {
           },
         })
       : state.sellNumber > 0
-      ? colorsReducerDispatch({
-          type: COLOR_CONTEXT_ACTIONS.HANDLE_SELL,
-          payload: {
-            colorName: color.name,
-            buySellAmount: state.sellNumber,
-          },
-        })
+      ? sell()
       : ACTIONS.NONE;
   }
 

@@ -27,7 +27,10 @@ export default function ColorsProvider({ children }) {
           { name: "purple", count: 5 },
         ])
       );
+      console.log("updating");
     }
+    console.log("not updating");
+
     return JSON.parse(localStorage.getItem("userColors"));
   }
 
@@ -70,11 +73,6 @@ export default function ColorsProvider({ children }) {
     });
   }
 
-  const value = {
-    colorsState,
-    colorsReducerDispatch,
-  };
-
   console.log(colorsState);
 
   useEffect(() => {
@@ -89,9 +87,13 @@ export default function ColorsProvider({ children }) {
       type: COLOR_CONTEXT_ACTIONS.FETCH_USER_COLORS,
       payload: { userColors: fetchUserColors() },
     });
-
-    // colorsReducerDispatch({ type: COLOR_CONTEXT_ACTIONS.FETCH_USER_COLORS });
   }, []);
+
+  const value = {
+    colorsState,
+    colorsReducerDispatch,
+    handleSell,
+  };
 
   return (
     <ColorsContext.Provider value={value}>

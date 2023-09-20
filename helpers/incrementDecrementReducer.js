@@ -2,6 +2,8 @@ import ACTIONS from "./ACTIONS";
 
 export function reducer(state, action) {
   const { type, payload } = action;
+  console.log(payload);
+  console.log(state);
   switch (type) {
     case ACTIONS.INCREMENT:
       if (payload.buyOrSell === "sell") {
@@ -41,8 +43,11 @@ export function reducer(state, action) {
       }
       break;
 
+    case ACTIONS.ZERO:
+      return { buyNumber: 0, sellNumber: 0 };
     case ACTIONS.NONE:
       return { ...state };
+
     default:
       return { ...state };
       break;
