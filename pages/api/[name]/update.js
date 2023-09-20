@@ -18,7 +18,6 @@ export default async (req, res) => {
       );
 
     const colors = await db.collection("colors").find({}).toArray();
-    console.log(colors);
     res.send(JSON.stringify(colors));
   } catch (e) {
     console.error(e);

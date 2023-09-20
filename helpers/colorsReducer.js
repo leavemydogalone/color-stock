@@ -17,13 +17,10 @@ export default function colorsReducer(state, action) {
       break;
     case COLOR_CONTEXT_ACTIONS.HANDLE_SELL:
       console.log(payload);
+
       return {
         marketColors: payload.updatedMarketColors,
-        userColors: state.userColors.map((color) =>
-          color.name === payload.colorName
-            ? { ...color, count: color.count - payload.adjustment }
-            : color
-        ),
+        userColors: payload.updatedUserColors,
       };
 
     case ACTIONS.BUY:

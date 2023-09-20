@@ -29,8 +29,6 @@ export default function ColorsProvider({ children }) {
       );
       console.log("updating");
     }
-    console.log("not updating");
-
     return JSON.parse(localStorage.getItem("userColors"));
   }
 
@@ -61,19 +59,25 @@ export default function ColorsProvider({ children }) {
   };
 
   function handleSell(colorName, adjustment) {
+    const userColors = JSON.parse(localStorage.getItem("userColors"));
+    const updatedUserColors = userColors.map((color) =>
+      color.name === colorName
+        ? { ...color, count: color.count - adjustment }
+        : color
+    );
+    localStorage.setItem("userColors", JSON.stringify(updatedUserColors));
     sellColor({ colorName: colorName, adjustment: adjustment }).then((data) => {
       colorsReducerDispatch({
         type: COLOR_CONTEXT_ACTIONS.HANDLE_SELL,
         payload: {
           updatedMarketColors: data,
+          updatedUserColors: updatedUserColors,
           colorName: colorName,
           adjustment: adjustment,
         },
       });
     });
   }
-
-  console.log(colorsState);
 
   useEffect(() => {
     fetchMarketColors().then((data) => {
