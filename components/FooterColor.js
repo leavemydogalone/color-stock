@@ -24,17 +24,7 @@ export default function FooterColor({ color, index }) {
   }
   function buy() {}
   function handleSubmit() {
-    state.buyNumber > 0
-      ? colorsReducerDispatch({
-          type: COLOR_CONTEXT_ACTIONS.HANDLE_SELL,
-          payload: {
-            colorName: color.name,
-            buySellAmount: state.buyNumber,
-          },
-        })
-      : state.sellNumber > 0
-      ? sell()
-      : ACTIONS.NONE;
+    state.buyNumber > 0 ? buy() : state.sellNumber > 0 ? sell() : ACTIONS.NONE;
   }
 
   return (
