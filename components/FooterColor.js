@@ -6,11 +6,12 @@ import ACTIONS from "../helpers/ACTIONS";
 import COLOR_CONTEXT_ACTIONS from "../helpers/COLOR_CONTEXT_ACTIONS";
 import { reducer } from "../helpers/incrementDecrementReducer";
 import { ColorsContext } from "../utils/ColorsProvider";
+import { ACTION } from "next/dist/client/components/app-router-headers";
 
 export default function FooterColor({ color, index }) {
   const colorsContextProvider = useContext(ColorsContext);
 
-  const { handleSell } = colorsContextProvider;
+  const { handleSell, handleBuy } = colorsContextProvider;
 
   const initState = () => {
     return { sellNumber: 0, buyNumber: 0 };
@@ -22,7 +23,10 @@ export default function FooterColor({ color, index }) {
     handleSell(color.name, state.sellNumber);
     dispatch({ type: ACTIONS.ZERO });
   }
-  function buy() {}
+  function buy() {
+    handleBuy(color.name, state.buyNumber);
+    dispatch({ type: ACTIONS.ZERO });
+  }
   function handleSubmit() {
     state.buyNumber > 0 ? buy() : state.sellNumber > 0 ? sell() : ACTIONS.NONE;
   }

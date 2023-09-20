@@ -11,12 +11,27 @@ export default function Header() {
 
   return (
     <header>
-      <section className={styles.scroller}>
-        {marketColors
-          ? marketColors.map((color) => (
-              <Ticker color={color} key={color.name} />
-            ))
-          : "Loading"}
+      <section className={styles.slider}>
+        {marketColors ? (
+          <div className={styles.slideTrack}>
+            {marketColors.map((color) => (
+              <Ticker
+                className={styles.slide}
+                color={color}
+                key={`${color.name} ticker 1`}
+              />
+            ))}
+            {marketColors.map((color) => (
+              <Ticker
+                className={styles.slide}
+                color={color}
+                key={`${color.name} ticker 2`}
+              />
+            ))}
+          </div>
+        ) : (
+          "Loading"
+        )}
       </section>
     </header>
   );

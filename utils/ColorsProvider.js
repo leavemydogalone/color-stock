@@ -7,6 +7,7 @@ export const ColorsContext = createContext({
   colorsState: {},
   colorsReducerDispatch: () => {},
   handleSell: () => {},
+  handleBuy: () => {},
 });
 
 export default function ColorsProvider({ children }) {
@@ -40,8 +41,47 @@ export default function ColorsProvider({ children }) {
     return data;
   };
 
-  const sellColor = async (payload) => {
+  const buyColor = async (payload) => {
     const { colorName, adjustment } = payload;
+    try {
+      const response = await fetch(`/api/${colorName}/update`, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ adjustment: adjustment, type: "buy" }),
+      });
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  function handleBuy(colorName, adjustment) {
+    const userColors = JSON.parse(localStorage.getItem("userColors"));
+    const updatedUserColors = userColors.map((color) =>
+      color.name === colorName
+        ? { ...color, count: color.count + adjustment }
+        : color
+    );
+    localStorage.setItem("userColors", JSON.stringify(updatedUserColors));
+    buyColor({ colorName: colorName, adjustment: adjustment }).then((data) => {
+      colorsReducerDispatch({
+        type: COLOR_CONTEXT_ACTIONS.HANDLE_SELL,
+        payload: {
+          updatedMarketColors: data,
+          updatedUserColors: updatedUserColors,
+          colorName: colorName,
+          adjustment: adjustment,
+        },
+      });
+    });
+  }
+
+  const sellColor = async (payload) => {
+    const { colorName, adjustment, type } = payload;
     try {
       const response = await fetch(`/api/${colorName}/update`, {
         method: "POST",
@@ -97,12 +137,10 @@ export default function ColorsProvider({ children }) {
     colorsState,
     colorsReducerDispatch,
     handleSell,
+    handleBuy,
   };
 
   return (
-    <ColorsContext.Provider value={value}>
-      <button onClick={() => handleSell("red", 5)}>button</button>
-      {children}
-    </ColorsContext.Provider>
+    <ColorsContext.Provider value={value}>{children}</ColorsContext.Provider>
   );
 }

@@ -22,11 +22,15 @@ export default function colorsReducer(state, action) {
         marketColors: payload.updatedMarketColors,
         userColors: payload.updatedUserColors,
       };
+      break;
 
     case ACTIONS.BUY:
-      payload.updateColors(payload.colorName, -state.buyNumber);
-      payload.updateUserColors(payload.colorName, state.buyNumber);
-      return { ...state, buyNumber: 0 };
+      console.log(payload);
+
+      return {
+        marketColors: payload.updatedMarketColors,
+        userColors: payload.updatedUserColors,
+      };
       break;
     case ACTIONS.NONE:
       return { ...state };
