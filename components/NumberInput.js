@@ -12,7 +12,7 @@ export default function NumberInput({ type, number, dispatch, color }) {
 
   const { name, count } = color;
 
-  const thisColor = marketColors.find((color) => color.name === name);
+  const thisColor = marketColors?.find((color) => color.name === name);
 
   return (
     <div className={styles.container}>

@@ -10,46 +10,35 @@ export default function colorsReducer(state, action) {
       };
       break;
     case COLOR_CONTEXT_ACTIONS.FETCH_USER_COLORS:
-      const fetchUserColors = () => {
-        if (!localStorage.getItem("userColors")) {
-          localStorage.setItem(
-            "userColors",
-            JSON.stringify([
-              { name: "red", count: 5 },
-              { name: "blue", count: 5 },
-              { name: "black", count: 5 },
-              { name: "green", count: 5 },
-              { name: "purple", count: 5 },
-            ])
-          );
-        }
-        return JSON.parse(localStorage.getItem("userColors"));
-      };
+      console.log(payload);
+      // const fetchUserColors = () => {
+      //   if (!localStorage.getItem("userColors")) {
+      //     localStorage.setItem(
+      //       "userColors",
+      //       JSON.stringify([
+      //         { name: "red", count: 5 },
+      //         { name: "blue", count: 5 },
+      //         { name: "black", count: 5 },
+      //         { name: "green", count: 5 },
+      //         { name: "purple", count: 5 },
+      //       ])
+      //     );
+      //   }
+      //   return JSON.parse(localStorage.getItem("userColors"));
+      // };
+
       return {
         ...state,
-        userColors: fetchUserColors(),
+        userColors: payload.userColors,
       };
       break;
     case COLOR_CONTEXT_ACTIONS.HANDLE_SELL:
-      const updateMarketColors = async () => {
-        try {
-          const response = await fetch(`/api/${payload.colorName}/update/`, {
-            method: "POST",
-            body: JSON.stringify({ count: payload.buySellAmount }),
-          });
-          const updatedMarketColors = await response.json();
-          return updatedMarketColors;
-        } catch (err) {
-          console.log(err);
-          return err;
-        }
-      };
-
+      console.log(payload);
       return {
-        // marketColors: [...updateMarketColors()],
-        userColors: state.userColors.map((color, i) =>
+        marketColors: payload.updatedMarketColors,
+        userColors: state.userColors.map((color) =>
           color.name === payload.colorName
-            ? { ...color, count: color.count - payload.buySellAmount }
+            ? { ...color, count: color.count - payload.adjustment }
             : color
         ),
       };

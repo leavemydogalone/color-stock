@@ -6,20 +6,20 @@ export default async (req, res) => {
     const client = await clientPromise;
     const db = client.db("colors");
 
-    const body = JSON.parse(req.body);
+    console.log("received");
+    const body = req.body;
 
-    // const num = parseInt();
     const color = await db
       .collection("colors")
       .findOneAndUpdate(
         { name: `${name}` },
-        { $inc: { count: parseInt(body.count) } },
+        { $inc: { count: parseInt(body.adjustment) } },
         { returnDocument: "after" }
       );
-    // const count = color.value.count;
 
     const colors = await db.collection("colors").find({}).toArray();
-    res.json(colors);
+    console.log(colors);
+    res.send(JSON.stringify(colors));
   } catch (e) {
     console.error(e);
   }
