@@ -15,6 +15,11 @@ export default function colorsReducer(state, action) {
         userColors: payload.userColors,
       };
       break;
+    case COLOR_CONTEXT_ACTIONS.FETCH_HISTORY_COLORS:
+      return {
+        ...state,
+        historyColors: payload.historyColors,
+      };
     case COLOR_CONTEXT_ACTIONS.HANDLE_SELL:
       console.log(payload);
 

@@ -3,7 +3,6 @@ import COLOR_CONTEXT_ACTIONS from "../helpers/COLOR_CONTEXT_ACTIONS";
 import colorsReducer from "../helpers/colorsReducer";
 
 export const ColorsContext = createContext({
-  marketColors: [],
   colorsState: {},
   colorsReducerDispatch: () => {},
   handleSell: () => {},
@@ -14,6 +13,7 @@ export default function ColorsProvider({ children }) {
   const [colorsState, colorsReducerDispatch] = useReducer(colorsReducer, {
     marketColors: [],
     userColors: [],
+    historyColors: [],
   });
 
   function fetchUserColors() {
@@ -38,6 +38,15 @@ export default function ColorsProvider({ children }) {
       method: "GET",
     });
     const data = await response.json();
+    return data;
+  };
+
+  const fetchHistory = async () => {
+    const response = await fetch("/api/history/get", {
+      method: "GET",
+    });
+    const data = await response.json();
+    console.log(data);
     return data;
   };
 
@@ -118,12 +127,20 @@ export default function ColorsProvider({ children }) {
       });
     });
   }
+  console.log(colorsState);
 
   useEffect(() => {
     fetchMarketColors().then((data) => {
       colorsReducerDispatch({
         type: COLOR_CONTEXT_ACTIONS.FETCH_MARKET_COLORS,
         payload: { updatedMarketcolors: data },
+      });
+    });
+
+    fetchHistory().then((data) => {
+      colorsReducerDispatch({
+        type: COLOR_CONTEXT_ACTIONS.FETCH_HISTORY_COLORS,
+        payload: { historyColors: data },
       });
     });
 

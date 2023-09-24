@@ -10,7 +10,7 @@ export default function Header() {
   const { marketColors } = colorsState;
 
   return (
-    <header>
+    <header className={styles.header}>
       <section className={styles.slider}>
         {marketColors ? (
           <div className={styles.slideTrack}>
