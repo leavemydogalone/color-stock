@@ -28,7 +28,6 @@ export default function ColorsProvider({ children }) {
           { name: "purple", count: 30 },
         ])
       );
-      console.log("updating");
     }
     return JSON.parse(localStorage.getItem("userColors"));
   }
@@ -46,7 +45,6 @@ export default function ColorsProvider({ children }) {
       method: "GET",
     });
     const data = await response.json();
-    console.log(data);
     return data;
   };
 
@@ -127,7 +125,6 @@ export default function ColorsProvider({ children }) {
       });
     });
   }
-  console.log(colorsState);
 
   useEffect(() => {
     fetchMarketColors().then((data) => {

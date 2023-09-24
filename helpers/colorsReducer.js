@@ -21,8 +21,6 @@ export default function colorsReducer(state, action) {
         historyColors: payload.historyColors,
       };
     case COLOR_CONTEXT_ACTIONS.HANDLE_SELL:
-      console.log(payload);
-
       return {
         marketColors: payload.updatedMarketColors,
         userColors: payload.updatedUserColors,
@@ -30,8 +28,6 @@ export default function colorsReducer(state, action) {
       break;
 
     case ACTIONS.BUY:
-      console.log(payload);
-
       return {
         marketColors: payload.updatedMarketColors,
         userColors: payload.updatedUserColors,
