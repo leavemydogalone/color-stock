@@ -5,21 +5,38 @@ export default async (req, res) => {
     const client = await clientPromise;
     const db = client.db("colors");
 
-    const body = req.body;
+    const adjustment = (number) => {
+      const adjust = Math.floor(Math.random() * number);
+      const finalAdjuster = Math.random() < 0.5 ? adjust : -adjust;
 
-    // if (!body.historyArray) {
-    //   res.send({ error: "No type or count adjustment" });
-    //   throw new Error("No type or count adjustment");
-    // }
+      const output =
+        number > 0
+          ? Math.min(number + finalAdjuster, 100)
+          : Math.max(number + finalAdjuster, -100);
+      return output;
+    };
 
+    // const adjustedColors = colors.map((color) => {
+    //   return {
+    //     ...color,
+    //     count: adjustment(color.count),
+    //   };
+    // });
     const colors = await db.collection("colors").find({}).toArray();
 
-    // const colorsWithoutID = colors.map(color => { return {count:...color.count, ...color.name}});
+    const update = await colors.forEach((color) => {
+      const findAndUpdate = db
+        .collection("colors")
+        .findOneAndUpdate(
+          { name: `${color.name}` },
+          { $set: { count: adjustment(color.count) } },
+          { returnDocument: "after" }
+        );
+    });
+
     const history = await db
       .collection("history")
       .insertOne({ colors: [...colors] });
-
-    console.log(body);
 
     res.send(JSON.stringify("History addition Success!"));
   } catch (e) {
