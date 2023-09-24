@@ -21,11 +21,11 @@ export default function ColorsProvider({ children }) {
       localStorage.setItem(
         "userColors",
         JSON.stringify([
-          { name: "red", count: 5 },
-          { name: "blue", count: 5 },
-          { name: "black", count: 5 },
-          { name: "green", count: 5 },
-          { name: "purple", count: 5 },
+          { name: "red", count: 30 },
+          { name: "blue", count: 30 },
+          { name: "black", count: 30 },
+          { name: "green", count: 30 },
+          { name: "purple", count: 30 },
         ])
       );
       console.log("updating");

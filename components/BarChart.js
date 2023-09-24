@@ -5,9 +5,7 @@ import styles from "./ChartContainer.module.css";
 export default function BarChart({ chartData }) {
   return (
     <>
-      <h2 style={{ textAlign: "center", color: "var(--color-dark)" }}>
-        Current Market Count of Colors
-      </h2>
+      <h2>Current Market Count of Colors</h2>
       <figure className={styles.canvasContainer}>
         <Bar
           data={chartData}
