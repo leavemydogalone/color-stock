@@ -11,7 +11,9 @@ export default function Ticker({ color, className }) {
 
   let direction = "up";
 
-  if (historyColors[0]) {
+  let countDisplay = color.count;
+
+  if (historyColors && historyColors[0]) {
     const yesterdaysColors = historyColors[1]
       ? historyColors[1].colors
       : historyColors[0].colors;
@@ -21,6 +23,7 @@ export default function Ticker({ color, className }) {
     );
 
     direction = color.count >= matchingColor.count ? "up" : "down";
+    countDisplay = color.count - matchingColor.count;
   }
 
   return (
@@ -31,7 +34,7 @@ export default function Ticker({ color, className }) {
         [className]: true,
       })}
     >
-      {color.count}
+      {countDisplay}
       <span className={styles.arrow}>
         {direction === "up" ? <>➚</> : <>➘</>}
       </span>

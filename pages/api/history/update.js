@@ -6,7 +6,7 @@ export default async (req, res) => {
     const db = client.db("colors");
 
     const adjustment = (number) => {
-      const adjust = Math.floor(Math.random() * number);
+      const adjust = Math.floor(Math.random() * 40);
       const finalAdjuster = Math.random() < 0.5 ? adjust : -adjust;
 
       const output =
@@ -16,13 +16,14 @@ export default async (req, res) => {
       return output;
     };
 
-    // const adjustedColors = colors.map((color) => {
-    //   return {
-    //     ...color,
-    //     count: adjustment(color.count),
-    //   };
-    // });
     const colors = await db.collection("colors").find({}).toArray();
+    // const oneColor = await db
+    //   .collection("colors")
+    //   .find({})
+    //   .sort({ _id: -1 })
+    //   .limit(1);
+
+    // console.log(oneColor);
 
     const update = await colors.forEach((color) => {
       const findAndUpdate = db
