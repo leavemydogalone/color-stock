@@ -8,6 +8,7 @@
 }
 .header {
   background: black;
+  overflow: hidden;
 }
 .slider {
   background: white;

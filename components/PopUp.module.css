@@ -1,0 +1,56 @@
+.popUp {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  z-index: 55;
+}
+.background {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: rgba(0, 0, 0, 0.541);
+}
+
+.popUpMain {
+  background: white;
+  border-radius: 5px;
+  width: 600px;
+  max-width: 100%;
+  height: auto;
+  padding: 30px;
+  position: relative;
+}
+.title {
+  font-size: 24px;
+  font-weight: 400;
+  display: flex;
+  justify-content: space-between;
+}
+.subtitle {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 10px 0 20px;
+}
+
+.text {
+  font-size: 16px;
+  font-weight: 400;
+  margin: 10px 0;
+}
+.x {
+  font-size: 18px;
+  color: #38386e;
+}
+@media screen and (hover: hover) and (pointer: fine) {
+  .x:hover,
+  .background:hover {
+    cursor: pointer;
+  }
+}

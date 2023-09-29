@@ -2,6 +2,20 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 10px 10px 30px;
+  padding: 30px 10px 30px;
   background: #38386e;
+  flex-direction: column;
+}
+.button {
+  background-color: var(--color-black);
+  color: white;
+
+  border: none;
+  background: white;
+  color: var(--color-primary);
+  font-size: 16px;
+  font-weight: 600;
+  padding: 10px 15px;
+  border-radius: 5px;
+  margin: 10px 0 10px;
 }
