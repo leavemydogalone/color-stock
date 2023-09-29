@@ -37,6 +37,13 @@ export default function PopUp({ popUpVisible, setPopUpVisible }) {
           30 of each color. Using the buy and sell sections for each color, you
           can buy and sell the colors from and to the market in real time.
         </p>
+        <p className={styles.text}>
+          Buy 10 <strong style={{ color: "var(--color-green)" }}>Green</strong>{" "}
+          and 10 will be removed from the market and added to your personal
+          wallet. Sell 10{" "}
+          <strong style={{ color: "var(--color-green)" }}>Green</strong> and 10
+          will be removed from your wallet and added to the market.
+        </p>
       </section>
     </div>
   );
