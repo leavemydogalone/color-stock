@@ -40,12 +40,14 @@
   font-size: 18px;
   font-weight: 600;
   margin: 10px 0 20px;
+  color: var(--color-primary);
 }
 
 .text {
   font-size: 16px;
   font-weight: 400;
   margin: 10px 0;
+  color: var(--color-dark);
 }
 .x {
   font-size: 18px;
