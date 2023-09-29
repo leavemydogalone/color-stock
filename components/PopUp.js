@@ -28,9 +28,9 @@ export default function PopUp({ popUpVisible, setPopUpVisible }) {
         </p>
         <p className={styles.text}>
           In the center of the screen, you can see the current market count of
-          each color. This market is the same for every one who everyone who
-          visits, and so any action you take will affect the market for everyone
-          else.
+          each color. This market is the same for everyone who visits, and so
+          any action you take with the market will affect the market for
+          everyone else.
         </p>
         <p className={styles.text}>
           At the bottom, you can see your wallet of colors. You have been gifted
