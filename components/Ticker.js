@@ -9,8 +9,6 @@ export default function Ticker({ color, className }) {
   const { colorsState } = colorsContextProvider;
   const { historyColors } = colorsState;
 
-  let direction = "up";
-
   let countDisplay = color.count;
 
   if (historyColors && historyColors[0]) {
@@ -22,7 +20,6 @@ export default function Ticker({ color, className }) {
       (historyColor) => historyColor.name === color.name
     );
 
-    direction = color.count >= matchingColor.count ? "up" : "down";
     countDisplay = color.count - matchingColor.count;
   }
 
@@ -36,7 +33,7 @@ export default function Ticker({ color, className }) {
     >
       {countDisplay}
       <span className={styles.arrow}>
-        {direction === "up" ? <>➚</> : <>➘</>}
+        {countDisplay >= 0 ? <>➚</> : <>➘</>}
       </span>
       {/* {color.name} */}
     </article>

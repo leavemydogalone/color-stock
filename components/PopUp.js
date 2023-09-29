@@ -22,7 +22,7 @@ export default function PopUp({ popUpVisible, setPopUpVisible }) {
         </p>
         <p className={styles.text}>
           Along the top of the screen you can see the daily increase and
-          decrease in the market count of each stock. <br />
+          decrease in the market count of each color. <br />
           Trades happen daily with the help of our handy automated trading
           helper that buys and sells colors every day around 4pm PST.
         </p>
