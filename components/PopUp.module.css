@@ -8,6 +8,7 @@
   align-items: center;
   overflow: hidden;
   z-index: 55;
+  padding: 10px;
 }
 .background {
   height: 100%;
@@ -26,6 +27,8 @@
   height: auto;
   padding: 30px;
   position: relative;
+  overflow-y: scroll;
+  max-height: 90vh;
 }
 .title {
   font-size: 24px;
