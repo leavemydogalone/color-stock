@@ -21,10 +21,10 @@ export default function PopUp({ popUpVisible, setPopUpVisible }) {
           Welcome to the wonderful world of color trading!
         </p>
         <p className={styles.text}>
-          Along the top of the screen you can see the daily increase and
-          decrease in the market count of each color. <br />
-          Trades happen daily with the help of our handy automated trading
-          helper that buys and sells colors every day around 4pm PST.
+          Along the top of the screen you can see the increase and decrease in
+          the market count of each color since yesterday. Trades happen daily
+          with the help of our handy automated trading helper that buys and
+          sells colors every day around 4pm PST.
         </p>
         <p className={styles.text}>
           In the center of the screen, you can see the current market count of
@@ -34,10 +34,8 @@ export default function PopUp({ popUpVisible, setPopUpVisible }) {
         </p>
         <p className={styles.text}>
           At the bottom, you can see your wallet of colors. You have been gifted
-          30 of each color.
-          <br />
-          Using the buy and sell sections for each color, you can buy and sell
-          the colors from and to the market in real time.
+          30 of each color. Using the buy and sell sections for each color, you
+          can buy and sell the colors from and to the market in real time.
         </p>
       </section>
     </div>
