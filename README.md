@@ -1,5 +1,13 @@
-View and Update the stock the various colors. See how the stock count of the various numbers rises and falls based on the input of other users and the "market" (automated updates using [pipedream](https://pipedream.com/)).
+### Nextjs, React, MongoDB, Chartjs
+Buy and Sell stocks from/to the Market. Market colors hosted on MongoDB and personal colors located in localStorage.
 
-Next, MongoDB, (insert graph visulizer here), pipedream
+Top bar shows increase or decrease from previous day's market numbers, so you can track how well they are doing.
+
+Automated daily updates to the market colors using pipedream.
+
+### Future update ideas:
+Create a unique monetary system so that different colors can be bought and sold for different amounts of this money, based on the current market count of the colors.
+
+Implement a historical graph of market color counts
 
 https://color-stock-8bmb.vercel.app/
